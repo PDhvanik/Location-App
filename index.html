@@ -15,9 +15,21 @@
       </h2>
       <button onclick="getLocation()"><img class="map-icon" src="./utils/img/map.png" height="30px"></button>
    </div>
-   <p id="data"></p>
+   <div class="output-data"> 
+      <div id="latitude"></div>
+      <div id="longitude"></div>
+   </div>
+   <div>
+      <p id="iAmDraggable" draggable="true" ondragstart="dragstartHandler(event)">
+         This element is draggable.
+      </p>
+      <div id="target" ondrop="dropHandler(event)" ondragover="dragoverHandler(event)">
+         <div class="drop-zone-title">Drop Zone</div>
+      </div>
+   </div>
    <script>
-      const x=document.getElementById("data");
+      const x = document.getElementById("latitude");
+      const y = document.getElementById("longitude");
       function getLocation() {
          if (navigator.geolocation) {
             navigator.geolocation.watchPosition(showPosition);
@@ -25,10 +37,34 @@
             x.innerHTML = "Geolocation is not supported by this browser.";
          }
       }
-
+      let x_coords, y_coords;
       function showPosition(position) {
-         x.innerHTML = "Latitude: " + position.coords.latitude +
-            "<br>Longitude: " + position.coords.longitude;
+         removePreviousLocalData();
+         x_coords = position.coords.latitude;
+         y_coords = position.coords.longitude;
+         x.innerHTML = "Latitude: " + x_coords 
+         y.innerHTML="Longitude: " + y_coords;
+         localStorage.setItem("Latitude", `${x_coords}`);
+         localStorage.setItem("Longitude", `${y_coords}`);
+         console.log(`Latitude: ${localStorage.getItem("Latitude")} Longitude: ${localStorage.getItem("Longitude")}`);
+      }
+      function removePreviousLocalData(){
+         localStorage.removeItem("Latitude");
+         localStorage.removeItem("Longitude");
+      }
+
+      function dragstartHandler(ev) {
+         ev.dataTransfer.setData("dragMe", ev.target.id);
+         ev.dataTransfer.effectAllowed = "move";
+      }
+      function dragoverHandler(ev) {
+         ev.preventDefault();
+         ev.dataTransfer.dropEffect = "move";
+      }
+      function dropHandler(ev) {
+         ev.preventDefault()
+         const data = ev.dataTransfer.getData("dragMe");
+         ev.target.appendChild(document.getElementById(data));
       }
    </script>
 </body>

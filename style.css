@@ -19,6 +19,33 @@ button:hover{
 p{
    display: flex;
    justify-content: center;
+   color: rgba(210, 0, 0, 0.824);
+   font-weight: bolder;
+   font-size:x-large;
+}
+
+.output-data{
+   display: flex;
+   justify-content: center;
    color: black;
+   font-weight: 500;
+   padding: 10px;
    font-size: larger;
+}
+#latitude{
+   margin-right: 30px;
+}
+#target{
+   background-color: black;
+   height:100px;
+   width: auto;
+   border-radius: 10px;
+   padding: 20px;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+}
+.drop-zone-title{
+   font-size: larger;
+   margin: 10px;
 }
