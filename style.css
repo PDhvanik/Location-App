@@ -1,0 +1,24 @@
+body{
+   color:goldenrod;
+}
+.container{
+   display: flex;
+   justify-content: center;
+}
+button{
+   background-color: white;
+   border:0px;
+}
+button:hover{
+   cursor:pointer;
+}
+.map-icon{
+   border-radius: 50%;
+   mix-blend-mode:multiply;
+}
+p{
+   display: flex;
+   justify-content: center;
+   color: black;
+   font-size: larger;
+}
